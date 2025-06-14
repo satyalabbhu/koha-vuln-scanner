@@ -30,7 +30,6 @@ except ImportError:
 
 try:
     from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-    import torch
     TRANSFORMERS_AVAILABLE = True
 except ImportError:
     TRANSFORMERS_AVAILABLE = False
@@ -85,9 +84,14 @@ class LibrarianReportGenerator:
                 # Use a smaller model for better performance
                 model_name = self.model_path or "microsoft/DialoGPT-medium"
                 
-                # Check if CUDA is available
-                device = "cuda" if torch.cuda.is_available() else "cpu"
-                logger.info(f"Using device: {device}")
+                # Import torch only when needed to avoid Streamlit file watcher issues
+                try:
+                    import torch
+                    device = "cuda" if torch.cuda.is_available() else "cpu"
+                    logger.info(f"Using device: {device}")
+                except ImportError:
+                    device = "cpu"
+                    logger.info("PyTorch not available, using CPU")
                 
                 self.tokenizer = AutoTokenizer.from_pretrained(model_name)
                 self.model = pipeline(
