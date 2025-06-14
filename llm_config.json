@@ -1,0 +1,43 @@
+{
+  "model_settings": {
+    "model_type": "llama",
+    "model_path": "",
+    "context_window": 4096,
+    "max_tokens": 512,
+    "temperature": 0.7
+  },
+  "supported_models": {
+    "llama": {
+      "description": "Local LLaMA model (.gguf format)",
+      "example_path": "/path/to/llama-2-7b-chat.gguf",
+      "requirements": [
+        "llama-cpp-python"
+      ]
+    },
+    "huggingface": {
+      "description": "HuggingFace transformers model",
+      "example_models": [
+        "microsoft/DialoGPT-medium",
+        "microsoft/DialoGPT-small",
+        "gpt2-medium"
+      ],
+      "requirements": [
+        "transformers",
+        "torch"
+      ]
+    },
+    "template": {
+      "description": "Template-based generation (no LLM required)",
+      "requirements": []
+    }
+  },
+  "library_context": {
+    "focus_areas": [
+      "Patron data protection",
+      "System availability",
+      "Compliance requirements",
+      "Staff training needs",
+      "Budget considerations"
+    ]
+  }
+}
